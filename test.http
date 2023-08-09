@@ -1,0 +1,43 @@
+### 회원가입 요청
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+  "userId": "rastalion4",
+  "password": "Dkzlsidhd2@",
+  "email": "chaolanboy@naver.com",
+  "nickName": "테이4"
+}
+
+
+### Login Test
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "loginUserId": "rastalion4",
+  "loginPassword": "Dkzlsidhd2@"
+}
+
+### Logout Test
+POST http://localhost:3000/logout
+Content-Type: application/json
+Cookie: refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJyYXN0YWxpb24zIiwiaWF0IjoxNjkxNDkyNzk1LCJleHAiOjE2OTQwODQ3OTV9.xF0KfX-F71i6WptLERdbFsP-KWCn3TDqRv20xHj0gKg
+
+### Get profile
+GET http://localhost:3000/profile HTTP/1.1
+Cookie: refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJyYXN0YWxpb240IiwiaWF0IjoxNjkxNTE1MzgzLCJleHAiOjE2OTQxMDczODN9.aEdsoQe2VX1iXpB4kqlErX-KGysSCX-eAPWtu9izMzk
+
+### Update profile
+POST http://localhost:3000/profile HTTP/1.1
+Content-Type: application/json
+Cookie: refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJyYXN0YWxpb240IiwiaWF0IjoxNjkxNTE1MzgzLCJleHAiOjE2OTQxMDczODN9.aEdsoQe2VX1iXpB4kqlErX-KGysSCX-eAPWtu9izMzk
+
+{
+  "password": "Dkzlsidhd2@",
+  "nickName": "테이 테스트",
+  "imageUrl": "없음",
+  "birthday": "1982.11.28",
+  "introduce": "자기소개 넣어보기"
+}

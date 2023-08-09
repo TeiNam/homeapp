@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #welcome-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 32px;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin: 0 0 24px;
+        }
+
+        button[type="submit"] {
+            padding: 12px 24px;
+            border-radius: 16px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            width: 100%;
+            max-width: 480px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0062cc;
+        }
+
+        /* 프로필 이미지 스타일 */
+        #profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto;
+        }
+
+        #profile-info {
+            text-align: left;
+            margin-left: 16px;
+        }
+
+        /* 프로필 수정 버튼 스타일 변경 */
+        #edit-profile {
+            padding: 12px 24px;
+            border-radius: 16px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            width: 100%;
+            max-width: 480px;
+            box-sizing: border-box;
+            margin-top: 24px;
+        }
+
+        #edit-profile:hover {
+            background-color: #0062cc;
+        }
+
+        input[type="submit"] {
+            padding: 12px 24px;
+            border-radius: 16px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            width: 100%;
+            max-width: 480px;
+            box-sizing: border-box;
+            margin-top: 24px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0062cc;
+        }
+    </style>
+</head>
+<body>
+<div id="welcome-container">
+    <h1>환영합니다, <%= user.nickName %>님!</h1>
+    <img src="<%= user.imageUrl || 'defaultImageUrl' %>" alt="프로필 이미지" id="profile-image">
+
+    <div id="profile-info">
+        <p><b>아이디:</b> <%= user.userId %></p>
+        <p><b>닉네임:</b> <%= user.nickName %></p>
+        <p><b>생일:</b> <%= user.birthday ? user.birthday : '미입력' %></p>
+        <p><b>자기소개:</b> <%= user.introduce || '미입력' %></p>
+    </div>
+
+    <!-- 프로필 수정 버튼 -->
+    <button id="edit-profile" type="button">프로필 수정</button>
+
+    <!-- 프로필 수정 폼 (기본적으로 숨겨진 상태로 설정) -->
+    <div id="edit-profile-form" style="display:none;">
+        <form action="/profile/update" method="POST">
+            <label for="nickName">닉네임:</label>
+            <input type="text" id="nickName" name="nickName" value="<%= user.nickName %>"><br>
+
+            <label for="imageUrl">프로필 이미지 URL:</label>
+            <input type="text" id="imageUrl" name="imageUrl" value="<%= user.imageUrl %>"><br>
+
+            <label for="birthday">생일:</label>
+            <input type="date" id="birthday" name="birthday" value="<%= user.birthday ? user.birthday.toISOString().substring(0, 10) : '' %>"><br>
+
+            <label for="introduce">자기소개:</label>
+            <textarea id="introduce" name="introduce"><%= user.introduce || '' %></textarea><br>
+
+            <input type="submit" value="수정 완료" style="margin-top: 24px;">
+        </form>
+    </div>
+
+    <!-- 프로필 수정 버튼 클릭시 폼을 표시하는 스크립트 -->
+    <script>
+        document.getElementById("edit-profile").addEventListener("click", function () {
+            const editForm = document.getElementById("edit-profile-form");
+            editForm.style.display = editForm.style.display === "none" ? "block" : "none";
+        });
+    </script>
+
+    <!-- 메인 페이지로 돌아가기 버튼 -->
+    <form action="/main" method="GET" style="display:inline;">
+        <button type="submit">메인 페이지로 돌아가기</button>
+    </form>
+
+    <!-- 로그아웃 버튼 -->
+    <form action="/logout" method="GET" style="display:inline;">
+        <button type="submit">로그아웃</button>
+    </form>
+</div>
+</body>
+</html>
