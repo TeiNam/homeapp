@@ -141,4 +141,23 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
+### macOS template
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# IntelliJ project files
+.idea
+.idea/*.xml
+*.iml
+out
+gen
+build
+rebel.xml
+
+# Gradle
+.gradle
+/build/
+.gradletasknamecache
+
 # End of https://www.toptal.com/developers/gitignore/api/node
